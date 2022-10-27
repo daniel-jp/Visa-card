@@ -1,8 +1,6 @@
 import './css/index.css'
 import IMask from 'imask';
 
-
-
 // the querySelector is for select the html elements
 const ccBgColor01 = document.querySelector('.cc-bg svg > g g:nth-child(1) path')
 const ccBgColor02 = document.querySelector('.cc-bg svg > g g:nth-child(2) path')
@@ -22,8 +20,6 @@ function setCardType(type) {
 }
 globalThis.setCardType = setCardType
     //setCardType("visa");
-
-
 
 // securty code 
 const cvcSecurityCode = document.querySelector('#security-code')
@@ -55,9 +51,6 @@ const expirationDatePattern = {
 }
 const expirationDateMasked = IMask(expirationDate, expirationDatePattern)
 
-
-
-
 const cardNumber = document.querySelector("#card-number")
 
 const cardNumberPattern = {
@@ -79,16 +72,11 @@ const cardNumberPattern = {
     ],
     dispatch: function(appended, dynamicMasked) {
         const number = (dynamicMasked.value + appended).replace(/\D/g, "");
-
         const foundMask = dynamicMasked.compiledMasks.find(function(item) {
-
             return number.match(item.regex)
         })
-
         return foundMask
     },
-
-
 }
 
 
@@ -96,7 +84,6 @@ const cardNumberMask = IMask(cardNumber, cardNumberPattern)
 
 
 const addButton = document.querySelector("#add-card")
-
 addButton.addEventListener("click", () => {
 
     alert("Card add succesful ✅ ")
@@ -133,23 +120,12 @@ const updateCardNumber = (number) => {
 
     const ccNumber = document.querySelector(".cc-number")
     ccNumber.innerText = number == 0 ? "1234 5678 9012 3456" : number;
-
 }
 
 expirationDateMasked.on("accept", () => {
     upadateExpirationDate(expirationDateMasked.value)
 })
-
 const upadateExpirationDate = (expiration) => {
     const ccExpiration = document.querySelector(".cc-expiration .value")
     ccExpiration.innerText = expiration.lengh == 0 ? "02/32" : expiration
 }
-
-/*
-   cardNumber.addEventListener("input", () => {
-    const ccNumber = document.querySelector(".cc-number")
-    ccNumber.innerText = cardNumber.value == 0 ? "1234 5678 9012 3456" : cardNumber.value })
-
-    expirationDate.addEventListener("input", () => {
-        const ccExpiration = document.querySelector(".cc-expiration .value")
-        ccExpiration.innerText = expirationDate.value })*/
